@@ -11,7 +11,7 @@ class Day2UtilTests {
 
         val res = sut.parseString("")
 
-        assertEquals(false, res.isValid)
+        assertEquals(false, res.first)
     }
 
     @Test
@@ -21,11 +21,11 @@ class Day2UtilTests {
 
         val res = sut.parseString("1-3 a: abcde")
 
-        assertTrue(res.isValid)
-        assertEquals(1, res.min)
-        assertEquals(3, res.max)
-        assertEquals('a', res.letter)
-        assertEquals("abcde", res.password)
+        assertTrue(res.first)
+        assertEquals(1, res.second.min)
+        assertEquals(3, res.second.max)
+        assertEquals('a', res.second.letter)
+        assertEquals("abcde", res.second.password)
     }
 
     @Test
@@ -33,7 +33,7 @@ class Day2UtilTests {
         val sut = Day2()
         val input = "1-3 a: aaa"
 
-        val res = sut.consolidate(input, AlgorithmType.FIRST)
+        val res = sut.consolidate(input, Day2.AlgorithmType.FIRST)
 
         assertEquals(1, res)
     }
@@ -46,7 +46,7 @@ class Day2UtilTests {
             1-3 b: bbb"
         """.trimIndent()
 
-        val res = sut.consolidate(input, AlgorithmType.FIRST)
+        val res = sut.consolidate(input, Day2.AlgorithmType.FIRST)
 
         assertEquals(2, res)
     }
@@ -59,7 +59,7 @@ class Day2UtilTests {
             1-3 c: bbb"
         """.trimIndent()
 
-        val res = sut.consolidate(input, AlgorithmType.FIRST)
+        val res = sut.consolidate(input, Day2.AlgorithmType.FIRST)
 
         assertEquals(1, res)
     }
@@ -72,7 +72,7 @@ class Day2UtilTests {
             1-3 c: bbb"
         """.trimIndent()
 
-        val res = sut.consolidate(input, AlgorithmType.FIRST)
+        val res = sut.consolidate(input, Day2.AlgorithmType.FIRST)
 
         assertEquals(0, res)
     }
@@ -82,7 +82,7 @@ class Day2UtilTests {
         val sut = Day2()
         val input = "1-3 a: abc"
 
-        val res = sut.consolidate(input, AlgorithmType.SECOND)
+        val res = sut.consolidate(input, Day2.AlgorithmType.SECOND)
 
         assertEquals(1, res)
     }
@@ -95,7 +95,7 @@ class Day2UtilTests {
             1-3 c: abc"
         """.trimIndent()
 
-        val res = sut.consolidate(input, AlgorithmType.SECOND)
+        val res = sut.consolidate(input, Day2.AlgorithmType.SECOND)
 
         assertEquals(2, res)
     }

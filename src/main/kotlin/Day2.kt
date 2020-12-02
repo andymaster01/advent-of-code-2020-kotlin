@@ -1,20 +1,21 @@
-data class StringParsedResult(
-    val isValid: Boolean,
-    val min: Int,
-    val max: Int,
-    val letter: Char,
-    val password: String
-)
-
-enum class AlgorithmType {
-    FIRST, SECOND
-}
-
 class Day2 {
-    fun parseString(input: String): StringParsedResult {
+
+    data class StringParsedResult(
+        val min: Int,
+        val max: Int,
+        val letter: Char,
+        val password: String
+    )
+
+    enum class AlgorithmType {
+        FIRST, SECOND
+    }
+
+
+    fun parseString(input: String): Pair<Boolean, StringParsedResult> {
 
         if (input.isEmpty())
-            return StringParsedResult(false, 0, 0, ' ', "")
+            return Pair(false, StringParsedResult(0, 0, ' ', ""))
 
         val parts = input.split(" ")
 
@@ -22,7 +23,7 @@ class Day2 {
 
         val letter = parts[1].split(":")
 
-        return StringParsedResult(true, nums[0].toInt(), nums[1].toInt(), letter[0].single(), parts[2])
+        return Pair(true, StringParsedResult(nums[0].toInt(), nums[1].toInt(), letter[0].single(), parts[2]))
     }
 
     fun isValidPasswordFirstTake(input: StringParsedResult): Boolean {
@@ -54,10 +55,13 @@ class Day2 {
 
         for (item in parts) {
             val p = parseString(item)
+
+            if(!p.first) continue
+
             val r = if (method == AlgorithmType.FIRST)
-                        isValidPasswordFirstTake(p)
+                        isValidPasswordFirstTake(p.second)
                     else
-                        isValidPasswordSecondTake(p)
+                        isValidPasswordSecondTake(p.second)
 
             cnt += (if (r) 1 else 0)
         }
