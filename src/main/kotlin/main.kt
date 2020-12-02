@@ -6,6 +6,7 @@ fun main() {
     println("")
     println("Day 2")
     println("\tExercise 1: ${getDay2Exercise1Result()}")
+    println("\tExercise 2: ${getDay2Exercise2Result()}")
 }
 
 
@@ -24,7 +25,17 @@ fun getDay1Exercise2Result(): Int {
 }
 
 fun getDay2Exercise1Result(): Int {
-    val input = """
+    val input = getDay2Dataset()
+    return Day2().consolidate(input, AlgorithmType.FIRST)
+}
+
+fun getDay2Exercise2Result(): Int {
+    val input = getDay2Dataset()
+    return Day2().consolidate(input, AlgorithmType.SECOND)
+}
+
+fun getDay2Dataset(): String {
+    return """
         4-5 m: mmpth
         1-7 r: rszchrrrzgr
         2-5 w: dgqtwwkwwc
@@ -1026,6 +1037,4 @@ fun getDay2Exercise1Result(): Int {
         4-11 n: ljgdnkgftmsvntnn
         16-19 t: tttttttttttttttttttt
     """.trimIndent()
-
-    return Day2Exercise1().consolidate(input)
 }
